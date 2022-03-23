@@ -11,7 +11,6 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
 public class EditActivity extends AppCompatActivity {
 
     private EditText mTitleText;

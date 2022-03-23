@@ -1,10 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".NotepadActivity">
+    tools:context=".Ma">
 
-    <item android:id="@+id/action_insert" android:title="@string/menu_insert"
-        android:orderInCategory="1" app:showAsAction="never" />
-    <item android:id="@+id/action_about" android:title="@string/menu_about"
-        android:orderInCategory="2" app:showAsAction="never" />
+    <item
+        android:id="@+id/action_insert"
+        android:orderInCategory="1"
+        android:title="@string/menu_insert"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="2"
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
 </menu>

@@ -9,8 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="corp">#5ABDBD</color>
     <color name="corp2">#bb5ABDBD</color>
-    <color name="red">#77ff0000 </color>
+    <color name="red">#aaff0000 </color>
     <color name="naranja">#77ff8000 </color>
     <color name="verde">#7700ff00 </color>
     <color name="whiteclaro">#bbFFFFFF</color>
+
 </resources>
