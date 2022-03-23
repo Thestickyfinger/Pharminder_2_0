@@ -3,22 +3,69 @@ package com.example.pharminder_2_0;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import android.widget.PopupMenu;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
-
+    private NotesDbAdapter dbAdapter;
+    private ListView m_listview;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_bar_main);
+
+        //inflamos el layout
+        setContentView(R.layout.activity_notepad);
+
+        //creamos el adaptador de la BD y la abrimos
+        dbAdapter = new NotesDbAdapter(this);
+        dbAdapter.open();
+
+        // Creamos un listview que va a contener el título de todas las notas y
+        // en el que cuando pulsemos sobre un título lancemos una actividad de editar
+        // la nota con el id correspondiente
+        m_listview = (ListView) findViewById(R.id.id_list_view);
+        m_listview.setOnItemClickListener(
+                new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
+                    {
+                        Intent i = new Intent(view.getContext(), com.example.pharminder_2_0.EditActivity.class);
+                        i.putExtra(NotesDbAdapter.KEY_ROWID, id);
+                        startActivityForResult(i, 1);
+                    }
+                }
+        );
+
+        // rellenamos el listview con los títulos de todas las notas en la BD
+        fillData();
     }
+
+    private void fillData() {
+        Cursor notesCursor = dbAdapter.fetchAllNotes();
+
+        // Creamos un array con los campos que queremos mostrar en el listview (sólo el título de la nota)
+        String[] from = new String[]{NotesDbAdapter.KEY_TITLE};
+
+        // array con los campos que queremos ligar a los campos del array de la línea anterior (en este caso sólo text1)
+        int[] to = new int[]{R.id.text1};
+
+        // Creamos un SimpleCursorAdapter y lo asignamos al listview para mostrarlo
+        SimpleCursorAdapter notes =
+                new SimpleCursorAdapter(this, R.layout.notes_row, notesCursor, from, to, 0);
+        m_listview.setAdapter(notes);
+    }
+
 
     public void showPopup(View view){
         PopupMenu popup=new PopupMenu(this, view);
@@ -41,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return true;
             case R.id.item3:
                 Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
-                switchMaintoNotepad();
+                switchMaintoEdit();
 
                 return true;
             default:
@@ -76,9 +123,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     //o una o la otra tenemo que utilizar
-    private void switchMaintoNotepad() {
+    private void switchMaintoEdit() {
 
-        startActivity(new Intent(MainActivity.this, NotepadActivity.class));
+        startActivity(new Intent(MainActivity.this, EditActivity.class));
 
     }
     @Override

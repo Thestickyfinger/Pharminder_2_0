@@ -42,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="saveNote"
-        android:text="@string/confirm" />
+        android:text="@string/confirm"
+        android:background="@drawable/roundshape"/>
 
 </LinearLayout>

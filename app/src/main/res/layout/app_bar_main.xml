@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/white"
     tools:context=".MainActivity"
-    tools:layout_centerHorizontal="false">
+    tools:layout_centerHorizontal="false"
+    tools:showIn="@layout/app_bar_main"
+    >
 
 
 
@@ -18,14 +20,13 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/activity_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="60dp"
         android:onClick="showPopup"
         app:backgroundTint="#5ABDBD"
         app:maxImageSize="44dp"
@@ -43,11 +44,11 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="188dp"
+        android:layout_width="160dp"
         android:layout_height="34dp"
         android:layout_gravity="center|top|left"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@drawable/pharminder_logo" />
 
     <ImageButton
@@ -56,10 +57,11 @@
         android:layout_height="56dp"
         android:layout_gravity="bottom|right"
         android:layout_marginLeft="335dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="#00FFFDFD"
         android:onClick="openMaps"
         android:tint="#000000"
         app:srcCompat="@drawable/ic_baseline_location_on_24" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
