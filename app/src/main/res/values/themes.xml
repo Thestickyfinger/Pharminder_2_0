@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Farmahomie" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/red</item>
         <item name="colorPrimaryVariant">@color/whiteclaro</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -15,7 +15,11 @@
 
 
     </style>
-
+    <style name="Theme.Farmahomie.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 
     <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
         <item name="android:dropDownHorizontalOffset">-76dp</item>
@@ -23,7 +27,9 @@
         <item name="android:textAppearanceLargePopupMenu">@color/white</item>
         <item name="android:textColor">@color/corp</item>
 
+
     </style>
+
     <style name="itemTextStyle.dm" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
         <item name="android:textColor">@color/white</item>
     </style>

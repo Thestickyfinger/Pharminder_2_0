@@ -52,6 +52,15 @@
         android:layout_marginTop="40dp"
         app:srcCompat="@drawable/pharminder_logo" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="160dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="40dp"
+        android:onClick="openSettings"
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="60dp"
