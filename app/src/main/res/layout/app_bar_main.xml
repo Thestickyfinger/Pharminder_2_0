@@ -29,7 +29,10 @@
         app:backgroundTint="#5ABDBD"
         app:maxImageSize="44dp"
         app:rippleColor="@color/white"
-        app:srcCompat="@drawable/ic_baseline_add_48" />
+        app:srcCompat="@drawable/ic_baseline_add_48"
+        android:translationZ="12dp"
+
+        />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

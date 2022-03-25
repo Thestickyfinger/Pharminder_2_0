@@ -16,20 +16,17 @@
 
     </style>
 
-    <style name="Theme.Farmahomie.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
+
     <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
         <item name="android:dropDownHorizontalOffset">-76dp</item>
         <item name="android:popupBackground">@drawable/roundshape</item>
         <item name="android:textAppearanceLargePopupMenu">@color/white</item>
-        <item name="android:textAppearanceSmallPopupMenu">@color/white</item>
+        <item name="android:textColor">@color/corp</item>
 
     </style>
-
+    <style name="itemTextStyle.dm" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 
     <style name="Theme.Pharminder_2_0.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

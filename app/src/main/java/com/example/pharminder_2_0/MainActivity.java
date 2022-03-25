@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
@@ -75,11 +76,19 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popupmenu);
         popup.show();
+        LinearLayout dim_layout = (LinearLayout) findViewById(R.id.dim_layout);
+        dim_layout.setVisibility(View.VISIBLE);
 
     }
 
+
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+
+        /* ESto no funciona del todo porque cuando pulsas fuera no vuelve a iluminarse*/
+
+        LinearLayout dim_layout = (LinearLayout) findViewById(R.id.dim_layout);
+        dim_layout.setVisibility(View.INVISIBLE);
 
         switch (item.getItemId()) {
             case R.id.item1:
@@ -95,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                 return true;
             default:
+
                 return false;
         }
     }

@@ -5,4 +5,6 @@
     android:background="@drawable/roundshaperojo"
     android:paddingTop="15dp"
     android:textAlignment="center"
-    android:textSize="16sp" />
+    android:textSize="16sp"
+    android:visibility="visible" />
+
