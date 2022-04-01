@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         fillData();
     }
 
-
     //Creamos menu con las tres opciones de añadir
 
     public void showPopup(View view) {
@@ -106,10 +105,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 createNote();
 
                 return true;
-            case R.id.action_settings:
-                Toast.makeText(this, "setiings", Toast.LENGTH_SHORT);
-                switchMaintoSettings();
-                return true;
             default:
 
                 return false;
@@ -129,6 +124,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     }
 
+    public void openSettings(View view) {
+        // Do something in response to button
+        switchMaintoSettings();
+
+    }
+
     private void switchMaintoSettings() {
 
         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
@@ -140,16 +141,35 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
         startActivityForResult(i, 1);
     }
-    //Creamos menu settings con las tres opciones de añadir
 
-    public void showsettings(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                switchMaintoSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //Menu de settings y about us
+
+    public void showMenu(View view) {
         PopupMenu popupsettings = new PopupMenu(this, view);
         popupsettings.setOnMenuItemClickListener(this);
         popupsettings.inflate(R.menu.menu_settings);
         popupsettings.show();
 
     }
-
 
 }
 
