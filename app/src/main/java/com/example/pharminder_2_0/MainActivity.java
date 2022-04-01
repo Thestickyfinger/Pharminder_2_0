@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         fillData();
     }
 
+    //Creamos menu con las tres opciones de añadir
+
     public void showPopup(View view) {
         PopupMenu popup = new PopupMenu(this, view);
         popup.setOnMenuItemClickListener(this);
@@ -158,5 +160,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    //Menu de settings y about us
+
+    public void showMenu(View view) {
+        PopupMenu popupsettings = new PopupMenu(this, view);
+        popupsettings.setOnMenuItemClickListener(this);
+        popupsettings.inflate(R.menu.menu_settings);
+        popupsettings.show();
+
+    }
+
 }
 
