@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
         startActivityForResult(i, 1);
     }
-    //Creamos menu con las tres opciones de añadir
+    //Creamos menu settings con las tres opciones de añadir
 
     public void showsettings(View view) {
         PopupMenu popupsettings = new PopupMenu(this, view);
@@ -151,28 +151,5 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
 
-
-
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_settings, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                switchMaintoSettings();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
- */
 }
 
