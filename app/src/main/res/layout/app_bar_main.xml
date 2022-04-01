@@ -58,7 +58,7 @@
         android:layout_height="34dp"
         android:layout_marginLeft="290dp"
         android:layout_marginTop="40dp"
-        android:onClick="openSettings"
+        android:onClick="showsettings"
         app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 
     <ImageButton
