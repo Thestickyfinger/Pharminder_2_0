@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,11 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="Abril de 2022"
-            android:textColor="@color/black"
+            android:text="TextView"
             android:textAlignment="center"
-            android:textSize="16sp"
-            android:layout_marginTop="10sp"
+            android:textSize="20dp"
+
             />
 
         <ImageButton
@@ -47,74 +46,8 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="161dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="L"
-            android:backgroundTint="@color/white"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="161dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="M"
-            android:backgroundTint="@color/white"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="161dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="X"
-            android:backgroundTint="@color/white"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="161dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="J"
-            android:backgroundTint="@color/white"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="161dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="V"
-            android:backgroundTint="@color/white"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="161dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="S"
-            android:backgroundTint="@color/white"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="161dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="D"
-            android:backgroundTint="@color/white"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/calendarRecycleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/calendarRecyclerView"/>
 </LinearLayout>
