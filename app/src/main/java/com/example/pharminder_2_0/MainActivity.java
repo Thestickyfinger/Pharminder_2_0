@@ -100,7 +100,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             case R.id.item2:
                 Toast.makeText(this, "Codigo nacional", Toast.LENGTH_SHORT);
-                return true;
+                switchMaintocalendar();
+                 return true;
+
             case R.id.item3:
                 Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
                 createNote();
@@ -129,6 +131,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     }
 
+
+
+    private void switchMaintocalendar() {
+
+        startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+
+    }
     private void switchMaintoSettings() {
 
         startActivity(new Intent(MainActivity.this, SettingsActivity.class));

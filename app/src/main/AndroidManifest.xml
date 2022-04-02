@@ -23,6 +23,11 @@
             android:label="activity_settings"
 
         />
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="false"
+            android:label="CalendarActivity"
+            />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
