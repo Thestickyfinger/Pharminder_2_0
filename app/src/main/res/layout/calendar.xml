@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="308dp"
+    android:layout_marginTop="120dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -25,10 +27,10 @@
 
         <TextView
             android:id="@+id/monthYearTV"
+            android:textAllCaps="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="Abril de 2022"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"
@@ -113,7 +115,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 
 
