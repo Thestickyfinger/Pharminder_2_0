@@ -3,9 +3,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        Log.d("MainActivity", "Primer mensaje para depurar" );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar);
         initWidgets();
@@ -101,10 +104,11 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     @Override
     public void onItemClick(int position, String dayText)
     {
-        if(!dayText.equals(""))
+
+        /*if(!dayText.equals(""))
         {
             String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 }

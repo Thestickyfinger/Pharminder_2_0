@@ -15,11 +15,28 @@ import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Build;
+import android.widget.TextView;
+
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, CalendarAdapter.OnItemListener {
 
     private NotesDbAdapter dbAdapter;
     private ListView m_listview;
+    private TextView monthYearText;
+    private RecyclerView calendarRecyclerView;
+    private LocalDate selectedDate;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +47,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         //creamos el adaptador de la BD y la abrimos
         dbAdapter = new NotesDbAdapter(this);
         dbAdapter.open();
+
+        //Codigo del CalendarActivity
+        initWidgets();
+        selectedDate = LocalDate.now();
+        setMonthView();
 
         // Creamos un listview que va a contener el título de todas las notas y
         // en el que cuando pulsemos sobre un título lancemos una actividad de editar
@@ -160,5 +182,79 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
 
+    //----------------Codigo del CalendarActivity---------------
+    private void initWidgets()
+    {
+        calendarRecyclerView = findViewById(R.id.calendarRecycleView);
+        monthYearText = findViewById(R.id.monthYearTV);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setMonthView()
+    {
+        monthYearText.setText(monthYearFromDate(selectedDate));
+        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+        calendarRecyclerView.setLayoutManager(layoutManager);
+        calendarRecyclerView.setAdapter(calendarAdapter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private ArrayList<String> daysInMonthArray(LocalDate date)
+    {
+        ArrayList<String> daysInMonthArray = new ArrayList<>();
+        YearMonth yearMonth = YearMonth.from(date);
+
+        int daysInMonth = yearMonth.lengthOfMonth();
+
+        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+
+        for(int i = 1; i <= 42; i++)
+        {   //Antes había:
+            //if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
+            if(i < dayOfWeek || i > daysInMonth + dayOfWeek - 1)
+            {
+                daysInMonthArray.add("");
+            }
+            else
+            {   //daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+                daysInMonthArray.add(String.valueOf(i - dayOfWeek + 1));
+            }
+        }
+        return  daysInMonthArray;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String monthYearFromDate(LocalDate date)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(formatter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void previousMonthAction(View view)
+    {
+        selectedDate = selectedDate.minusMonths(1);
+        setMonthView();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void nextMonthAction(View view)
+    {
+        selectedDate = selectedDate.plusMonths(1);
+        setMonthView();
+    }
+
+    @Override
+    public void onItemClick(int position, String daytex) {
+        /*if(!dayText.equals(""))
+        {
+            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        }*/
+    }
 }
 
