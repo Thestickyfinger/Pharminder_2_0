@@ -1,4 +1,7 @@
 package com.example.pharminder_2_0;
+
+//NO SE USA YA ESTA CLASE!!!
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -105,10 +108,12 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     public void onItemClick(int position, String dayText)
     {
 
-        /*if(!dayText.equals(""))
+        if(!dayText.equals(""))
         {
+            /*
             String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        }*/
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();*/
+
+        }
     }
 }
