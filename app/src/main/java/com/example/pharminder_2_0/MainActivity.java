@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     //----------------Codigo del CalendarActivity---------------
+
     private void initWidgets()
     {
         calendarRecyclerView = findViewById(R.id.calendarRecycleView);
@@ -277,6 +278,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }*/
+
     }
 }
 

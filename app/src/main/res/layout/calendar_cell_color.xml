@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cellDayText"
+        android:id="@+id/COLORCELL"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,8 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        android:onClick="colorDay"
-
+        android:background="@drawable/roundshaperojo"
         />
 
 
