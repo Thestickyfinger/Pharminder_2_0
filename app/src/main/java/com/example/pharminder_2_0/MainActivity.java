@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Build;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         switch (item.getItemId()) {
             case R.id.item1:
                 Toast.makeText(this, "Codigo de barras", Toast.LENGTH_SHORT);
+               escanear();
                 return true;
 
             case R.id.item2:
@@ -140,6 +143,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
     //menu para setting
+
+
+    public void  escanear(){
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan();
+    }
 
     public void openMaps(View view) {
         // Do something in response to button

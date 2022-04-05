@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pharminder_2_0">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -23,6 +24,11 @@
             android:label="activity_settings"
 
         />
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true"/>
         <activity
             android:name=".CalendarActivity"
             android:exported="false"
@@ -53,9 +59,7 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="barcode" />
+
         <uses-library
                 android:name="org.apache.http.legacy"
                 android:required="false" />
