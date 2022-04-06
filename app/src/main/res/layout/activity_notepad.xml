@@ -24,6 +24,15 @@
 
     <include layout="@layout/app_bar_main" />
     <include layout="@layout/calendar"/>
+
+    <TextView
+        android:id="@+id/resultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="100dp"
+        android:gravity="center|top"
+       />
     <!--
     <include layout="@layout/calendar"/>
     <CalendarView

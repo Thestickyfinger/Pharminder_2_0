@@ -1,5 +1,6 @@
 package com.example.pharminder_2_0;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.os.Build;
 import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
+    private TextView tvBarCode;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -89,10 +92,19 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         m_listview.setAdapter(notes);
     }
 
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         fillData();
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent );
+        if(result != null)
+            if (result.getContents() != null){
+                String resultindex = result.getContents().substring(5,11);
+                tvBarCode = findViewById(R.id.resultado);
+                tvBarCode.setText("El código de barras es:\n" + resultindex);
+            }else{
+                tvBarCode.setText("Error al escanear el código de barras");
+            }
     }
 
 
@@ -149,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.initiateScan();
     }
+
 
     public void openMaps(View view) {
         // Do something in response to button
