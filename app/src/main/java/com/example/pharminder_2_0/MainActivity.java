@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent );
         if(result != null)
             if (result.getContents() != null){
-                String resultindex = result.getContents().substring(5,11);
+                String resultindex = result.getContents().substring(6,12);
                 tvBarCode = findViewById(R.id.resultado);
                 tvBarCode.setText("El código de barras es:\n" + resultindex);
             }else{
