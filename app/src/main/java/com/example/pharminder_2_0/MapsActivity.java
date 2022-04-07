@@ -1,22 +1,35 @@
 package com.example.pharminder_2_0;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.location.Location;
 import android.os.Bundle;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -204,5 +217,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // permissions this app might request.
         }
     }
+
 
 }
