@@ -14,20 +14,6 @@
         android:padding="8dp"
         android:layout_marginTop="20sp">
 
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/sp_type"
-            android:background="@color/white"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bt_find"
-            android:text="Find"
-            />
-
     </LinearLayout>
 
     <fragment
@@ -38,7 +24,8 @@
         tools:context=".MapsActivity2"
         android:layout_marginBottom="10sp"
         android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp" />
+        android:layout_marginRight="10sp">
+    </fragment>
 
 </LinearLayout>
 
