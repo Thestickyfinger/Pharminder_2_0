@@ -1,5 +1,7 @@
 package com.example.pharminder_2_0;
 
+//-----------------NO SIRVE PARA NADA YA-------------------------------------------------
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -44,7 +46,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
-public class MapsActivity2 extends FragmentActivity{
+public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback{
 
     // Nuestro mapa
     GoogleMap mMap;
@@ -65,8 +67,8 @@ public class MapsActivity2 extends FragmentActivity{
         setContentView(R.layout.activity_maps);
 
         //Para el NearbyPlaces
-        spType = findViewById(R.id.sp_type);
-        btFind = findViewById(R.id.bt_find);
+        //spType = findViewById(R.id.sp_type);
+        //btFind = findViewById(R.id.bt_find);
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         String[] placeTypeList = {"atm", "bank"};
         String[] placeNameList = {"ATM", "Bank"};
@@ -165,6 +167,11 @@ public class MapsActivity2 extends FragmentActivity{
             }
 
         }
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
     }
 
     private class PlaceTask extends AsyncTask<String, Integer, String> {
