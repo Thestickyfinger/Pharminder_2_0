@@ -66,6 +66,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Definimos nuestro escuchador de clicks en el mapa.
     private final GoogleMap.OnMapClickListener mClickListener = new GoogleMap.OnMapClickListener() {
 
+
+
         @Override
         public void onMapClick(LatLng position) {
             // Recibimos las coordenadas del punto del mapa que pulsó el usuario.
@@ -138,11 +140,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Search for restaurants nearby
-        Uri gmmIntentUri = Uri.parse("geo:0,0?q=farmacias");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        startActivity(mapIntent);
     }
     /*
     @Override
@@ -246,5 +243,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // permissions this app might request.
         }
     }
+
 
 }

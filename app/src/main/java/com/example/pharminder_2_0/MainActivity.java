@@ -1,15 +1,16 @@
 package com.example.pharminder_2_0;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -17,7 +18,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,12 +27,21 @@ import android.widget.TextView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, CalendarAdapter.OnItemListener {
+
+    private static final String API_URL  = "https://cima.aemps.es/cima/rest/medicamento";
 
     private NotesDbAdapter dbAdapter;
     private ListView m_listview;
@@ -101,10 +110,62 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             if (result.getContents() != null){
                 String resultindex = result.getContents().substring(6,12);
                 tvBarCode = findViewById(R.id.resultado);
+
+                APIFromCIMATask api = new APIFromCIMATask();
+                api.cn = resultindex;
+                api.execute();
+
                 tvBarCode.setText("El código de barras es:\n" + resultindex);
             }else{
                 tvBarCode.setText("Error al escanear el código de barras");
             }
+    }
+
+    public void SetPrescriptionData(String data)
+    {
+
+        setContentView(R.layout.prueba_codigo_de_barras);
+        EditText mTitleText = (EditText) findViewById(R.id.textoCima);
+        mTitleText.setText(data);
+    }
+
+    private class APIFromCIMATask extends AsyncTask<String, String, String> {
+        String cn;
+        String response;
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        protected String doInBackground(String... urls) {
+            // We make the connection
+            try {
+                // Creamos la conexión
+                URL url = new URL(API_URL + "?cn=" + cn);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Content-Type", "application/json");
+//                conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+//                conn.setDoOutput(true);
+
+                Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                response = "";
+
+                for (int c; (c = in.read()) >= 0; )
+                    response += (char) c;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                response = "ERROR: " + e.getLocalizedMessage();
+            }
+
+//            SetPrescriptionData(response);
+            Log.i("RECEIVED", response);
+
+            return response;
+        }
+
+        protected void onPostExecute(String result){
+            SetPrescriptionData(result);
+        }
     }
 
 
