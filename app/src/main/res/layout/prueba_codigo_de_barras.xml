@@ -10,7 +10,7 @@
         android:layout_height="576dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="Medicamento"
         tools:layout_editor_absoluteX="-1dp"
         tools:layout_editor_absoluteY="-4dp" />
 </LinearLayout>
