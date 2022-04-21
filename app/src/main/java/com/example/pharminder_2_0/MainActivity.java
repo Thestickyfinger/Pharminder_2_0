@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import org.json.*;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
     private TextView tvBarCode;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -101,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         m_listview.setAdapter(notes);
     }
 
+    //-------------------Escaneo Cod-Barras y Busqueda en Api------------------------------
+
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         fillData();
@@ -117,16 +124,54 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                 tvBarCode.setText("El código de barras es:\n" + resultindex);
             }else{
-                Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Scanning cancelled", Toast.LENGTH_LONG).show();
             }
     }
 
-    public void SetPrescriptionData(String data)
-    {
+    public void SetPrescriptionData(String data) {
 
-        setContentView(R.layout.prueba_codigo_de_barras);
-        EditText mTitleText = (EditText) findViewById(R.id.textoCima);
-        mTitleText.setText(data);
+        setContentView(R.layout.resumen_medicamento);
+        TextView nombre = (TextView) findViewById(R.id.nombre_medicamento);
+        TextView p_activo = (TextView) findViewById(R.id.princ_Activo);
+        TextView c_presc = (TextView) findViewById(R.id.presc_med);
+        //ImageView imagen = (ImageView) findViewById(R.id.imagen_medicamento) ;
+        TextView url_prospecto = (TextView) findViewById(R.id.button2);
+
+        JSONObject obj = null;
+        String jsonString = data;
+        String nombreMedicamento = null;
+        String pActivo = null;
+        String cPresc = null;
+        String urlProspecto = null;
+        //String urlImagenMedicamento = null;
+
+
+
+        try {
+            obj = new JSONObject(jsonString);
+            nombreMedicamento = obj.getString("nombre");
+            pActivo = obj.getString("pactivos");
+            cPresc = obj.getString("cpresc");
+            JSONArray documentosArray = obj.getJSONArray("docs");
+            for (int i = 0; i < documentosArray.length(); i++)
+            {
+                if(documentosArray.getJSONObject(i).getInt("tipo")==2){
+                    urlProspecto = documentosArray.getJSONObject(i).getString("url");
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        nombre.setText(nombreMedicamento);
+        p_activo.setText(pActivo);
+        c_presc.setText(cPresc);
+
+        //imagen.setImage();
+
+
+
     }
 
     private class APIFromCIMATask extends AsyncTask<String, String, String> {
@@ -169,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
 
-    //Creamos menu con las tres opciones de añadir
+    //---------------------Creamos menu con las tres opciones de añadir------------------
 
     public void showPopup(View view) {
         PopupMenu popup = new PopupMenu(this, view);

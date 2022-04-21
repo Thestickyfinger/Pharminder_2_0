@@ -7,11 +7,12 @@
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/activity_maps.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/activity_notepad.xml" value="0.2" />
-        <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/app_bar_main.xml" value="0.13994565217391305" />
-        <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/calendar.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/app_bar_main.xml" value="0.264" />
+        <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/calendar.xml" value="0.264" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/calendar_cell.xml" value="0.25" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/calendar_cell_color.xml" value="0.25" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/notes_row.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/pharminder.xml" value="0.25" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/prueba_codigo_de_barras.xml" value="0.1033210332103321" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/resumen_medicamento.xml" value="0.25" />
         <entry key="..\:/Users/berjo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/settings_activity.xml" value="0.25" />
@@ -31,7 +32,6 @@
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/calendar.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/calendar_cell.xml" value="0.16822916666666668" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/main.xml" value="0.1" />
-        <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/metermedicamento.xml" value="0.1265625" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/notes_row.xml" value="0.2" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/layout/settings_activity.xml" value="0.2418478260869565" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/menu/main.xml" value="0.1265625" />
@@ -39,7 +39,6 @@
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/menu/menu_notepad.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/menu/menu_settings.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/menu/popupmenu.xml" value="0.12083333333333333" />
-        <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/xml/nuevomedic.xml" value="0.1265625" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/xml/root_preference2.xml" value="0.21875" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/Pharminder_2_0/app/src/main/res/xml/root_preferences.xml" value="0.21875" />
       </map>

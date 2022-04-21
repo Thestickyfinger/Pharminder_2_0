@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="Información General del Medicamento">
+
 
         <EditTextPreference
             app:key="Nombre medicamento"
@@ -11,10 +13,11 @@
             app:defaultValue="false"
             app:entries="@array/reply_entries"
             app:entryValues="@array/reply_values"
-            app:key="Mg"
+            app:key="princActivo"
             app:title="Principio activo"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
+
 
 </PreferenceScreen>
