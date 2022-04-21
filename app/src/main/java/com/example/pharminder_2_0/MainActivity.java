@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                 tvBarCode.setText("El código de barras es:\n" + resultindex);
             }else{
-                tvBarCode.setText("Error al escanear el código de barras");
+                Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
             }
     }
 
