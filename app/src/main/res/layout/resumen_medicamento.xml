@@ -13,12 +13,19 @@
         android:layout_gravity="top"
         android:orientation="vertical" >
         <LinearLayout
-            android:id="@+id/info_medicamentos"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
+            android:orientation="horizontal"
             android:layout_marginTop="100dp"
-            android:orientation="vertical" >
+            >
+
+            <LinearLayout
+                android:id="@+id/info_medicamentos"
+                android:layout_width="265dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/nombre_medicamento"
                     android:layout_width="wrap_content"
@@ -27,31 +34,84 @@
                     android:orientation="vertical"
                     android:text="Nombre"
                     android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/princ_Activo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
                     android:text="pactivo"
                     android:textSize="15dp"
-                    android:textStyle="normal"/>
+                    android:textStyle="normal" />
+
                 <TextView
                     android:id="@+id/presc_med"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
                     android:text="presc"
                     android:textSize="10dp"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    >
+                    <TextView
+                        android:id="@+id/viadmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Via de Administración: "
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/vias_administracion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Uso "
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
                 <ImageView
                     android:id="@+id/imagen_medicamento"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                />
+                    />
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Activar/Desactivar"
+                    android:textSize="15dp"/>
+                <!-- Boton que tendra de función activar o
+                        desactivar un medicamento en el menu principal -->
+                <ToggleButton
+                    android:id="@+id/activar_medicamento"
+                    android:layout_width="57dp"
+                    android:layout_height="37dp"
+                    android:textOff="Off"
+                    android:textOn="On"
+
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     <!--
@@ -66,25 +126,54 @@
     </ListView>
 
     -->
-    <!--
-    <TextView
-        android:id="@+id/resultado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="100dp"
-        android:gravity="center|top"
-        />
-    -->
+
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:onClick="@/urlProspecto"
             android:text="Descargar Prospecto"
             />
 
+        <!-- Vamos a hacer las preferencias del usuario
+            -1ª toma del medicamento
+            -Frecuencia de toma del medicamento
+            -Momento de finalizacion de toma del medicamento
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="adfsdgsdg"
+                >
+
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Layout_guardar_medicamento"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity ="bottom"
+        android:layout_marginLeft="180dp"
+        android:layout_marginBottom="55dp"
+        >
+        <Button
+            android:id="@+id/guardar_medicamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_200"
+            android:text="Guardar Medicamento" />
+
     </LinearLayout>
 
     <include layout="@layout/pharminder" />
+
+
 </FrameLayout>

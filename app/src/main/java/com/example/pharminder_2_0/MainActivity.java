@@ -20,6 +20,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import org.json.*;
+import org.w3c.dom.Text;
+
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +42,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, CalendarAdapter.OnItemListener {
@@ -136,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         TextView c_presc = (TextView) findViewById(R.id.presc_med);
         //ImageView imagen = (ImageView) findViewById(R.id.imagen_medicamento) ;
         TextView url_prospecto = (TextView) findViewById(R.id.button2);
+        TextView via_admin = (TextView) findViewById(R.id.vias_administracion);
 
         JSONObject obj = null;
         String jsonString = data;
@@ -143,6 +147,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         String pActivo = null;
         String cPresc = null;
         String urlProspecto = null;
+        String viasAdministracion = null;
+        //ArrayList<String> viasAdministracion = new ArrayList<String>();
         //String urlImagenMedicamento = null;
 
 
@@ -152,21 +158,37 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             nombreMedicamento = obj.getString("nombre");
             pActivo = obj.getString("pactivos");
             cPresc = obj.getString("cpresc");
-            JSONArray documentosArray = obj.getJSONArray("docs");
-            for (int i = 0; i < documentosArray.length(); i++)
+            //JSONArray documentosArray = obj.getJSONArray("docs");
+            JSONArray viasAdminArray = obj.getJSONArray("viasAdministracion");
+
+            //Loop para buscar PROSPECTO
+            /*for (int i = 0; i < documentosArray.length(); i++)
             {
                 if(documentosArray.getJSONObject(i).getInt("tipo")==2){
                     urlProspecto = documentosArray.getJSONObject(i).getString("url");
                 }
+            }*/
+            //Loop para buscar VIAS DE ADMINISTRACION
+            for (int i = 0; i < viasAdminArray.length(); i++)
+            {
+                //viasAdministracion.add(viasAdminArray.getJSONObject(i).getString("nombre"));
+                viasAdministracion = viasAdminArray.getJSONObject(i).getString("nombre");
             }
+
 
         } catch (JSONException e) {
             e.printStackTrace();
+            nombreMedicamento    = "ERROR: " + e.getLocalizedMessage();
         }
 
         nombre.setText(nombreMedicamento);
         p_activo.setText(pActivo);
         c_presc.setText(cPresc);
+        via_admin.setText(viasAdministracion);
+        //Loop para escribir lista de VIAS DE ADMINISTRACION
+        /*for(int i = 0;i < viasAdministracion.size(); i++){
+            vias_administracion = viasAdministracion.get(i);
+        }*/
 
         //imagen.setImage();
 
@@ -175,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private class APIFromCIMATask extends AsyncTask<String, String, String> {
+
         String cn;
         String response;
 
