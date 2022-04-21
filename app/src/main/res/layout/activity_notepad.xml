@@ -20,7 +20,9 @@
         android:layout_height="279dp"
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:divider="@color/blackclaro"
+        android:dividerHeight="1.0sp"/>
 
     <include layout="@layout/app_bar_main" />
     <include layout="@layout/calendar"/>

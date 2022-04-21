@@ -13,5 +13,6 @@
     <color name="naranja">#77ff8000 </color>
     <color name="verde">#7700ff00 </color>
     <color name="whiteclaro">#bbFFFFFF</color>
+    <color name="blackclaro">#55000000</color>
 
 </resources>
