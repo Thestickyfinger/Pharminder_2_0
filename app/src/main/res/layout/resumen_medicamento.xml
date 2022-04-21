@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:orientation="vertical"
-                    android:text="presc"
+                    android:text="Prescripción Medica: N/A"
                     android:textSize="10dp"
                     android:textStyle="italic" />
 
@@ -74,7 +74,7 @@
                         android:id="@+id/vias_administracion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Uso "
+                        android:text="N/A"
                         />
 
                 </LinearLayout>

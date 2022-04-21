@@ -7,14 +7,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class EditActivity extends AppCompatActivity {
 
-    private EditText mTitleText;
-    private EditText mBodyText;
+    private TextView mTitleText;
+    private TextView mBodyText;
     private Long mRowId;
     private NotesDbAdapter dbAdapter;
 
@@ -23,12 +24,12 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // infla el layout
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.resumen_medicamento);
 
         // obtiene referencia a los tres views que componen el layout
-        mTitleText = (EditText) findViewById(R.id.title);
-        mBodyText = (EditText) findViewById(R.id.body);
-        Button confirmButton = (Button) findViewById(R.id.confirm);
+        mTitleText = (TextView) findViewById(R.id.nombre_medicamento);
+        mBodyText = (TextView) findViewById(R.id.princ_Activo);
+        Button medicamentoButton = (Button) findViewById(R.id.guardar_medicamento);
 
         //creamos el adaptador de la BD y la abrimos
         dbAdapter = new NotesDbAdapter(this);
