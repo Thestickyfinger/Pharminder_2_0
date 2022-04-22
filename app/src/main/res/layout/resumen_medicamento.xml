@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".EditActivity">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -128,6 +128,7 @@
     -->
 
         <Button
+            android:layout_marginTop="5dp"
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,7 +137,7 @@
             android:text="Descargar Prospecto"
             />
 
-        <!-- Vamos a hacer las preferencias del usuario
+        <!-- _____________Vamos a hacer las preferencias del usuario______________
             -1ª toma del medicamento
             -Frecuencia de toma del medicamento
             -Momento de finalizacion de toma del medicamento
@@ -144,14 +145,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp">
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/primeraToma"
+                android:hint="Fecha de 1ª toma"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="adfsdgsdg"
-                >
-
-            </TextView>
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
+                android:maxLines="1" />
+            <EditText
+                android:id="@+id/frecuenciaToma"
+                android:hint="Frecuencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
+                android:maxLines="1" />
+            <EditText
+                android:id="@+id/ultimaToma"
+                android:hint="Fecha final"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
+                android:maxLines="1" />
         </LinearLayout>
 
     </LinearLayout>
@@ -169,7 +192,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/teal_200"
-            android:text="Guardar Medicamento" />
+            android:text="Guardar Medicamento"
+            android:onClick="saveNote"/>
 
     </LinearLayout>
 
