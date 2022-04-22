@@ -35,6 +35,10 @@
             android:exported="false"
             android:label="CalendarActivity"
             />
+        <activity android:name=".GuardarMedicamento"
+            android:exported="false"
+            android:parentActivityName=".EditActivity"
+            android:label="GuardarMedicamento"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

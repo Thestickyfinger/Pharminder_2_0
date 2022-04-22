@@ -4,23 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
-
-import org.json.*;
-import org.w3c.dom.Text;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -42,7 +36,6 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, CalendarAdapter.OnItemListener {
@@ -131,70 +124,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
     }
 
-    public void SetPrescriptionData(String data) {
 
-        setContentView(R.layout.resumen_medicamento);
-        TextView nombre = (TextView) findViewById(R.id.nombre_medicamento);
-        TextView p_activo = (TextView) findViewById(R.id.princ_Activo);
-        TextView c_presc = (TextView) findViewById(R.id.presc_med);
-        //ImageView imagen = (ImageView) findViewById(R.id.imagen_medicamento) ;
-        TextView url_prospecto = (TextView) findViewById(R.id.button2);
-        TextView via_admin = (TextView) findViewById(R.id.vias_administracion);
-
-        JSONObject obj = null;
-        String jsonString = data;
-        String nombreMedicamento = null;
-        String pActivo = null;
-        String cPresc = null;
-        String urlProspecto = null;
-        String viasAdministracion = null;
-        //ArrayList<String> viasAdministracion = new ArrayList<String>();
-        //String urlImagenMedicamento = null;
-
-
-
-        try {
-            obj = new JSONObject(jsonString);
-            nombreMedicamento = obj.getString("nombre");
-            pActivo = obj.getString("pactivos");
-            cPresc = obj.getString("cpresc");
-            //JSONArray documentosArray = obj.getJSONArray("docs");
-            JSONArray viasAdminArray = obj.getJSONArray("viasAdministracion");
-
-            //Loop para buscar PROSPECTO
-            /*for (int i = 0; i < documentosArray.length(); i++)
-            {
-                if(documentosArray.getJSONObject(i).getInt("tipo")==2){
-                    urlProspecto = documentosArray.getJSONObject(i).getString("url");
-                }
-            }*/
-            //Loop para buscar VIAS DE ADMINISTRACION
-            for (int i = 0; i < viasAdminArray.length(); i++)
-            {
-                //viasAdministracion.add(viasAdminArray.getJSONObject(i).getString("nombre"));
-                viasAdministracion = viasAdminArray.getJSONObject(i).getString("nombre");
-            }
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            nombreMedicamento    = "ERROR: " + e.getLocalizedMessage();
-        }
-
-        nombre.setText(nombreMedicamento);
-        p_activo.setText(pActivo);
-        c_presc.setText(cPresc);
-        via_admin.setText(viasAdministracion);
-        //Loop para escribir lista de VIAS DE ADMINISTRACION
-        /*for(int i = 0;i < viasAdministracion.size(); i++){
-            vias_administracion = viasAdministracion.get(i);
-        }*/
-
-        //imagen.setImage();
-
-
-
-    }
 
     private class APIFromCIMATask extends AsyncTask<String, String, String> {
 
@@ -232,9 +162,25 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
 
         protected void onPostExecute(String result){
-            SetPrescriptionData(result);
+            switchMaintoBarCode(response);
         }
+
     }
+    private void switchMaintoBarCode(String result) {
+        // Creamos el Intent que va a lanzar la activity de editar medicamento (ApiCodeBar)
+        Intent intent = new Intent(this, GuardarMedicamento.class);
+        startActivityForResult(intent, 1);
+        // Creamos la informacion a pasar entre actividades
+        Bundle b = new Bundle();
+        b.putString("result", result);
+
+        // Asociamos esta informacion al intent
+        intent.putExtras(b);
+
+        // Iniciamos la nueva actividad
+        startActivity(intent);
+    }
+
 
 
     //---------------------Creamos menu con las tres opciones de añadir------------------
