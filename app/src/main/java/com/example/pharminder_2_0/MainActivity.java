@@ -170,9 +170,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         // Creamos el Intent que va a lanzar la activity de editar medicamento (ApiCodeBar)
         Intent intent = new Intent(this, GuardarMedicamento.class);
         startActivityForResult(intent, 1);
+        Log.i("------------------------Enviado", result);
+
         // Creamos la informacion a pasar entre actividades
         Bundle b = new Bundle();
-        b.putString("result", result);
+        b.putString("resultado", result);
 
         // Asociamos esta informacion al intent
         intent.putExtras(b);

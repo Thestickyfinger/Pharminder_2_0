@@ -94,7 +94,7 @@ public class NotepadActivity extends AppCompatActivity {
     }
 
     private void createNote() {
-        Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
+        Intent i = new Intent(this, com.example.pharminder_2_0.GuardarMedicamento.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 

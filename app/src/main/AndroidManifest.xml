@@ -36,8 +36,7 @@
             android:label="CalendarActivity"
             />
         <activity android:name=".GuardarMedicamento"
-            android:exported="false"
-            android:parentActivityName=".EditActivity"
+            android:parentActivityName=".MainActivity"
             android:label="GuardarMedicamento"/>
 
         <meta-data
