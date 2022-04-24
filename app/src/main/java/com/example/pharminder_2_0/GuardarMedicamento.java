@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 
 public class GuardarMedicamento extends AppCompatActivity                                      {
-                                                           //implements View.OnClickListener
+    //implements View.OnClickListener
 
     private TextView nombre;
     private TextView p_activo;
@@ -121,7 +121,6 @@ public class GuardarMedicamento extends AppCompatActivity                       
    /* EditText primera_toma = (EditText) findViewById(R.id.primeraToma);
     EditText frecuencia = (EditText) findViewById(R.id.frecuenciaToma);
     EditText ultima_toma = (EditText) findViewById(R.id.ultimaToma);
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -129,29 +128,21 @@ public class GuardarMedicamento extends AppCompatActivity                       
                 showDatePickerDialog();
                 break;
             case R.id.frecuenciaToma:
-
                 break;
             case R.id.ultimaToma:
-
                 break;
         }
     }
-
-
     public static class DatePickerFragment extends DialogFragment {
-
         private DatePickerDialog.OnDateSetListener listener;
-
         public static DatePickerFragment newInstance(DatePickerDialog.OnDateSetListener listener) {
             DatePickerFragment fragment = new DatePickerFragment();
             fragment.setListener(listener);
             return fragment;
         }
-
         public void setListener(DatePickerDialog.OnDateSetListener listener) {
             this.listener = listener;
         }
-
         @Override
         @NonNull
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -159,10 +150,8 @@ public class GuardarMedicamento extends AppCompatActivity                       
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-
             return new DatePickerDialog(getActivity(), listener, year, month, day);
         }
-
     }*/
 
     //-----------------------------------Guardar Medicamento en la Base de Datos----------------------------------
