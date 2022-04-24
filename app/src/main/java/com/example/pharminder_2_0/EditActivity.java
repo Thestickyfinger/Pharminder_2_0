@@ -36,7 +36,7 @@ public class EditActivity extends AppCompatActivity {
         // infla el layout
         setContentView(R.layout.activity_edit);
 
-       /* // Recuperamos la informacion pasada en el intent
+        /* // Recuperamos la informacion pasada en el intent
         Bundle bundle = this.getIntent().getExtras();
         String respuesta = bundle.getString("result");
         SetPrescriptionData(respuesta);*/
