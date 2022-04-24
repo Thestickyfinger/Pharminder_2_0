@@ -16,13 +16,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+// ----------------------------------YA NO SE USA------------------------------------------------------
 
 public class EditActivity extends AppCompatActivity {
 
-    private TextView mTitleText;
-    private TextView mBodyText;
+    private TextView titleText;
+    private TextView bodyText;
     private Long mRowId;
     private NotesDbAdapter dbAdapter;
+
+    private TextView c_presc;
+    private TextView via_admin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +42,10 @@ public class EditActivity extends AppCompatActivity {
         SetPrescriptionData(respuesta);*/
 
         // obtiene referencia a los tres views que componen el layout
-        mTitleText = (TextView) findViewById(R.id.title);
-        mBodyText = (TextView) findViewById(R.id.body);
-        Button medicamentoButton = (Button) findViewById(R.id.guardar_medicamento);
+        titleText = (TextView) findViewById(R.id.title);
+        bodyText = (TextView) findViewById(R.id.body);
+        c_presc = (TextView) findViewById(R.id.prescripcionmedica);
+        via_admin = (TextView) findViewById(R.id.viasdadministracion);
 
         //creamos el adaptador de la BD y la abrimos
         dbAdapter = new NotesDbAdapter(this);
@@ -58,10 +64,14 @@ public class EditActivity extends AppCompatActivity {
         // en caso contrario se dejan en blanco (editamos una nota nueva)
         if (mRowId != null) {
             Cursor note = dbAdapter.fetchNote(mRowId);
-            mTitleText.setText(note.getString(
+            titleText.setText(note.getString(
                     note.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE)));
-            mBodyText.setText(note.getString(
+            bodyText.setText(note.getString(
                     note.getColumnIndexOrThrow(NotesDbAdapter.KEY_BODY)));
+            c_presc.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_PRESCRIPCION)));
+            via_admin.setText(note.getString(
+                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_VIADMIN)));
         }
     }
 
@@ -94,24 +104,27 @@ public class EditActivity extends AppCompatActivity {
 
 
     public void saveNote(View view) {
-        String title = mTitleText.getText().toString();
-        String body = mBodyText.getText().toString();
+        String title = titleText.getText().toString();
+        String body = bodyText.getText().toString();
+        String prescripcion = c_presc.getText().toString();
+        String viadministracion = via_admin.getText().toString();
 
         if (mRowId == null) {
-            long id = dbAdapter.createNote(title, body);
+            long id = dbAdapter.createNote(title, body, prescripcion, viadministracion);
             if (id > 0) {
                 mRowId = id;
             }
         } else {
-            dbAdapter.updateNote(mRowId, title, body);
+            dbAdapter.updateNote(mRowId, title, body, prescripcion, viadministracion);
         }
         setResult(RESULT_OK);
         dbAdapter.close();
         finish();
     }
 
-    public void SetPrescriptionData(String data) {
+    //------------------Para juntar GuardarMedicamento con EditActivity, pero no lo hemos conseguido-------------------
 
+    /*public void SetPrescriptionData(String data) {
         setContentView(R.layout.resumen_medicamento);
         TextView nombre = (TextView) findViewById(R.id.nombre_medicamento);
         TextView p_activo = (TextView) findViewById(R.id.princ_Activo);
@@ -119,7 +132,6 @@ public class EditActivity extends AppCompatActivity {
         //ImageView imagen = (ImageView) findViewById(R.id.imagen_medicamento) ;
         TextView url_prospecto = (TextView) findViewById(R.id.button2);
         TextView via_admin = (TextView) findViewById(R.id.vias_administracion);
-
         JSONObject obj = null;
         String jsonString = data;
         String nombreMedicamento = null;
@@ -129,9 +141,6 @@ public class EditActivity extends AppCompatActivity {
         String viasAdministracion = null;
         //ArrayList<String> viasAdministracion = new ArrayList<String>();
         //String urlImagenMedicamento = null;
-
-
-
         try {
             obj = new JSONObject(jsonString);
             nombreMedicamento = obj.getString("nombre");
@@ -139,41 +148,32 @@ public class EditActivity extends AppCompatActivity {
             cPresc = obj.getString("cpresc");
             //JSONArray documentosArray = obj.getJSONArray("docs");
             JSONArray viasAdminArray = obj.getJSONArray("viasAdministracion");
-
             //Loop para buscar PROSPECTO
-            /*for (int i = 0; i < documentosArray.length(); i++)
+            *//*for (int i = 0; i < documentosArray.length(); i++)
             {
                 if(documentosArray.getJSONObject(i).getInt("tipo")==2){
                     urlProspecto = documentosArray.getJSONObject(i).getString("url");
                 }
-            }*/
+            }*//*
             //Loop para buscar VIAS DE ADMINISTRACION
             for (int i = 0; i < viasAdminArray.length(); i++)
             {
                 //viasAdministracion.add(viasAdminArray.getJSONObject(i).getString("nombre"));
                 viasAdministracion = viasAdminArray.getJSONObject(i).getString("nombre");
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
             nombreMedicamento    = "ERROR: " + e.getLocalizedMessage();
         }
-
         nombre.setText(nombreMedicamento);
         p_activo.setText(pActivo);
         c_presc.setText(cPresc);
         via_admin.setText(viasAdministracion);
         //Loop para escribir lista de VIAS DE ADMINISTRACION
-        /*for(int i = 0;i < viasAdministracion.size(); i++){
+        *//*for(int i = 0;i < viasAdministracion.size(); i++){
             vias_administracion = viasAdministracion.get(i);
-        }*/
-
+        }*//*
         //imagen.setImage();
-
-
-
-    }
+    }*/
 
 }
-

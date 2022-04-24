@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context=".EditActivity"
+    tools:context=".GuardarMedicamento"
     >
 <FrameLayout
     android:layout_width="match_parent"
@@ -197,7 +197,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/teal_200"
             android:text="Guardar Medicamento"
-            android:onClick="@/saveNote"/>
+            android:onClick="saveNoteFromGuardar"/>
 
     </LinearLayout>
 

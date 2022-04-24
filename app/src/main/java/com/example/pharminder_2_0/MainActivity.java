@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-                        Intent i = new Intent(view.getContext(), com.example.pharminder_2_0.EditActivity.class);
+                        Intent i = new Intent(view.getContext(), com.example.pharminder_2_0.GuardarMedicamento.class);
                         i.putExtra(NotesDbAdapter.KEY_ROWID, id);
                         startActivityForResult(i, 1);
                     }
@@ -171,12 +171,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Intent intent = new Intent(this, GuardarMedicamento.class);
         startActivityForResult(intent, 1);
         // Creamos la informacion a pasar entre actividades
-        Bundle b = new Bundle();
-        b.putString("result", result);
+        //Bundle b = new Bundle();
+        //b.putString("result", result);
 
         // Asociamos esta informacion al intent
-        intent.putExtras(b);
-
+        intent.putExtra("Result", result);
         // Iniciamos la nueva actividad
         startActivity(intent);
     }
@@ -265,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     private void createNote() {
-        Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
+        Intent i = new Intent(this, com.example.pharminder_2_0.GuardarMedicamento.class);
         startActivityForResult(i, 1);
     }
     //Creamos menu settings con las tres opciones de añadir

@@ -42,7 +42,7 @@ public class NotepadActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
                     {
-                        Intent i = new Intent(view.getContext(), com.example.pharminder_2_0.EditActivity.class);
+                        Intent i = new Intent(view.getContext(), com.example.pharminder_2_0.GuardarMedicamento.class);
                         i.putExtra(NotesDbAdapter.KEY_ROWID, id);
                         startActivityForResult(i, ACTIVITY_EDIT);
                     }
@@ -94,7 +94,7 @@ public class NotepadActivity extends AppCompatActivity {
     }
 
     private void createNote() {
-        Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
+        Intent i = new Intent(this, com.example.pharminder_2_0.GuardarMedicamento.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 

@@ -1,64 +1,62 @@
 package com.example.pharminder_2_0;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Intent;
+
 import android.database.Cursor;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Calendar;
 
 public class GuardarMedicamento extends AppCompatActivity                                      {
                                                            //implements View.OnClickListener
+
+    private TextView nombre;
+    private TextView p_activo;
+    private TextView c_presc;
+    private TextView url_prospecto;
+    private TextView via_admin;
+
+    private TextView mTitleText;
+    private TextView mBodyText;
+    private Long mRowId;
+    private NotesDbAdapter dbAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen_medicamento);
 
-        // Recuperamos la informacion pasada en el intent
+        //creamos el adaptador de la BD y la abrimos
+        dbAdapter = new NotesDbAdapter(this);
+        dbAdapter.open();
+
+
         Bundle bundle = this.getIntent().getExtras();
-        String respuesta = bundle.getString("result");
+        String respuesta = bundle.getString("Result");
         SetPrescriptionData(respuesta);
+
     }
 
 
     public void SetPrescriptionData(String data) {
 
-        TextView nombre = (TextView) findViewById(R.id.nombre_medicamento);
-        TextView p_activo = (TextView) findViewById(R.id.princ_Activo);
-        TextView c_presc = (TextView) findViewById(R.id.presc_med);
+        nombre = (TextView) findViewById(R.id.nombre_medicamento);
+        p_activo = (TextView) findViewById(R.id.princ_Activo);
+        c_presc = (TextView) findViewById(R.id.presc_med);
         //ImageView imagen = (ImageView) findViewById(R.id.imagen_medicamento) ;
-        TextView url_prospecto = (TextView) findViewById(R.id.button2);
-        TextView via_admin = (TextView) findViewById(R.id.vias_administracion);
+        url_prospecto = (TextView) findViewById(R.id.button2);
+        via_admin = (TextView) findViewById(R.id.vias_administracion);
         EditText primera_toma = (EditText) findViewById(R.id.primeraToma);
         EditText frecuencia = (EditText) findViewById(R.id.frecuenciaToma);
         EditText ultima_toma = (EditText) findViewById(R.id.ultimaToma);
@@ -118,6 +116,8 @@ public class GuardarMedicamento extends AppCompatActivity                       
 
     }
 
+    //----------------------------------Para hacer las barras de seleccion de 1ªToma, Frecuencia y ultima toma ----------------------
+
    /* EditText primera_toma = (EditText) findViewById(R.id.primeraToma);
     EditText frecuencia = (EditText) findViewById(R.id.frecuenciaToma);
     EditText ultima_toma = (EditText) findViewById(R.id.ultimaToma);
@@ -164,4 +164,60 @@ public class GuardarMedicamento extends AppCompatActivity                       
         }
 
     }*/
+
+    //-----------------------------------Guardar Medicamento en la Base de Datos----------------------------------
+
+    public void saveNoteFromGuardar(View view) {
+        String title = nombre.getText().toString();
+        Log.i("----------------------RECEIVED", title);
+        String pactivo = p_activo.getText().toString();
+        Log.i("----------------------RECEIVED", pactivo);
+        String prescripcion = c_presc.getText().toString();
+        Log.i("----------------------RECEIVED", prescripcion);
+        String viadministracion = via_admin.getText().toString();
+        Log.i("----------------------RECEIVED", viadministracion);
+
+
+        if (mRowId == null) {
+            long id = dbAdapter.createNote(title, pactivo, prescripcion, viadministracion);
+            if (id > 0) {
+                mRowId = id;
+            }
+        } else {
+            dbAdapter.updateNote(mRowId, title, pactivo, prescripcion, viadministracion);
+        }
+        setResult(RESULT_OK);
+        dbAdapter.close();
+        finish();
+    }
+
+    //--------------------Crea Menu de opciones dentro del medicamento------------------------
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Se recrea el menu que aparece en ActionBar de la actividad.
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Gestiona la seleccion de opciones en el menú
+        int id = item.getItemId();
+        if (id == R.id.action_delete) {
+            if (mRowId != null) {
+                dbAdapter.deleteNote(mRowId);
+            }
+            setResult(RESULT_OK);
+            dbAdapter.close();
+            finish();
+        }
+
+        if (id == R.id.action_about) {
+            System.out.println("APPMOV: About action...");
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
