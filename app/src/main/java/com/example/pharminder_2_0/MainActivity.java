@@ -4,13 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -26,6 +26,10 @@ import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
     private TextView tvBarCode;
+    private ArrayList<String> resultado = new ArrayList<String>();
+    private EditText codigo_nacional;
 
 
 
@@ -73,8 +79,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         // en el que cuando pulsemos sobre un título lancemos una actividad de editar
         // la nota con el id correspondiente
         m_listview = (ListView) findViewById(R.id.id_list_view);
-        m_listview.setOnItemClickListener(
+        /*m_listview.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
+
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
                         Intent i = new Intent(view.getContext(), com.example.pharminder_2_0.GuardarMedicamento.class);
@@ -82,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                         startActivityForResult(i, 1);
                     }
                 }
-        );
+        );*/
 
         // rellenamos el listview con los títulos de todas las notas en la BD
         fillData();
@@ -163,11 +170,58 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
 
         protected void onPostExecute(String result){
-            switchMaintoBarCode(response);
+
+            JSONObject obj = null;
+            String jsonString = result;
+            String nombreMedicamento = null;
+            String pActivo = null;
+            String cPresc = null;
+            String urlProspecto = null;
+            String viasAdministracion = null;
+            if (result == null){
+                tvBarCode.setText("Escaneo NO válido\n");
+                switchtoMain();
+            }
+
+            try {
+                obj = new JSONObject(jsonString);
+                nombreMedicamento = obj.getString("nombre");
+                pActivo = obj.getString("pactivos");
+                cPresc = obj.getString("cpresc");
+                JSONArray documentosArray = obj.getJSONArray("docs");
+                JSONArray viasAdminArray = obj.getJSONArray("viasAdministracion");
+
+                //Loop para buscar PROSPECTO
+                for (int i = 0; i < documentosArray.length(); i++)
+                {
+                    if(documentosArray.getJSONObject(i).getInt("tipo")==2){
+                        urlProspecto = documentosArray.getJSONObject(i).getString("url");
+                    }
+                }
+                //Loop para buscar VIAS DE ADMINISTRACION
+                for (int i = 0; i < viasAdminArray.length(); i++)
+                {
+                    //viasAdministracion.add(viasAdminArray.getJSONObject(i).getString("nombre"));
+                    viasAdministracion = viasAdminArray.getJSONObject(i).getString("nombre");
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                nombreMedicamento    = "ERROR: " + e.getLocalizedMessage();
+            }
+
+            resultado.add(nombreMedicamento); //.get(0);
+            resultado.add(pActivo); //.get(1);
+            resultado.add(cPresc); //.get(2);
+            resultado.add(urlProspecto); //.get(3);
+            resultado.add(viasAdministracion); //.get(4);
+            //Pasamos en array con todos los datos como resultado
+            switchMaintoBarCode(resultado);
         }
 
     }
-    private void switchMaintoBarCode(String result) {
+    private void switchMaintoBarCode(ArrayList result) {
         // Creamos el Intent que va a lanzar la activity de editar medicamento (ApiCodeBar)
         Intent intent = new Intent(this, GuardarMedicamento.class);
         startActivityForResult(intent, 1);
@@ -212,16 +266,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             case R.id.item2:
                 Toast.makeText(this, "Codigo nacional", Toast.LENGTH_SHORT);
-                switchMaintocalendar();
+                createNoteFromCN();
                  return true;
 
             case R.id.item3:
                 Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
-                createNote();
+                createNoteFromNombre();
 
                 return true;
             case R.id.action_settings:
-                Toast.makeText(this, "setiings", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "setings", Toast.LENGTH_SHORT);
                 switchMaintoSettings();
                 return true;
             default:
@@ -246,11 +300,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private void switchMaintoMaps() {
 
-        // Search for restaurants nearby
-        Uri gmmIntentUri = Uri.parse("geo:0,0?q=farmacias");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        startActivity(mapIntent);
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+
+    }
+
+    private void switchtoMain() {
+
+        startActivity(new Intent(MainActivity.this, MainActivity.class));
 
     }
 
@@ -267,9 +323,21 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     }
 
+    private void createNoteFromCN() {
+        /*Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
+        startActivityForResult(i, 1);*/
+        setContentView(R.layout.busqueda_cn);
+    }
+    public void createNote(View view){
+        codigo_nacional = (EditText) findViewById(R.id.title_cn);
+        String codigonacional = codigo_nacional.getText().toString();
+        APIFromCIMATask api = new APIFromCIMATask();
+        api.cn = codigonacional;
+        api.execute();
+    }
 
-    private void createNote() {
-        Intent i = new Intent(this, com.example.pharminder_2_0.GuardarMedicamento.class);
+    private void createNoteFromNombre() {
+        Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
         startActivityForResult(i, 1);
     }
     //Creamos menu settings con las tres opciones de añadir
