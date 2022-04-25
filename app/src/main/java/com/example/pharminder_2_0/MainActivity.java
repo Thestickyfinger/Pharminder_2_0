@@ -246,11 +246,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private void switchMaintoMaps() {
 
-        // Search for restaurants nearby
-        Uri gmmIntentUri = Uri.parse("geo:0,0?q=farmacias");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        startActivity(mapIntent);
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+
 
     }
 
