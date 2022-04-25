@@ -1,7 +1,9 @@
 package com.example.pharminder_2_0;
 
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +26,7 @@ public class GuardarMedicamento extends AppCompatActivity                       
     private TextView nombre;
     private TextView p_activo;
     private TextView c_presc;
-    private TextView url_prospecto;
+    private String url_prospecto;
     private TextView via_admin;
 
     private TextView mTitleText;
@@ -55,7 +57,7 @@ public class GuardarMedicamento extends AppCompatActivity                       
         p_activo = (TextView) findViewById(R.id.princ_Activo);
         c_presc = (TextView) findViewById(R.id.presc_med);
         //ImageView imagen = (ImageView) findViewById(R.id.imagen_medicamento) ;
-        url_prospecto = (TextView) findViewById(R.id.button2);
+        //url_prospecto = (TextView) findViewById(R.id.button2);
         via_admin = (TextView) findViewById(R.id.vias_administracion);
         EditText primera_toma = (EditText) findViewById(R.id.primeraToma);
         EditText frecuencia = (EditText) findViewById(R.id.frecuenciaToma);
@@ -70,7 +72,9 @@ public class GuardarMedicamento extends AppCompatActivity                       
         String viasAdministracion = null;
         //ArrayList<String> viasAdministracion = new ArrayList<String>();
         //String urlImagenMedicamento = null;
+        if (data == null){
 
+        }
 
 
         try {
@@ -78,16 +82,16 @@ public class GuardarMedicamento extends AppCompatActivity                       
             nombreMedicamento = obj.getString("nombre");
             pActivo = obj.getString("pactivos");
             cPresc = obj.getString("cpresc");
-            //JSONArray documentosArray = obj.getJSONArray("docs");
+            JSONArray documentosArray = obj.getJSONArray("docs");
             JSONArray viasAdminArray = obj.getJSONArray("viasAdministracion");
 
             //Loop para buscar PROSPECTO
-            /*for (int i = 0; i < documentosArray.length(); i++)
+            for (int i = 0; i < documentosArray.length(); i++)
             {
                 if(documentosArray.getJSONObject(i).getInt("tipo")==2){
                     urlProspecto = documentosArray.getJSONObject(i).getString("url");
                 }
-            }*/
+            }
             //Loop para buscar VIAS DE ADMINISTRACION
             for (int i = 0; i < viasAdminArray.length(); i++)
             {
@@ -105,6 +109,7 @@ public class GuardarMedicamento extends AppCompatActivity                       
         p_activo.setText(pActivo);
         c_presc.setText(cPresc);
         via_admin.setText(viasAdministracion);
+        url_prospecto = urlProspecto;
         //Loop para escribir lista de VIAS DE ADMINISTRACION
         /*for(int i = 0;i < viasAdministracion.size(); i++){
             vias_administracion = viasAdministracion.get(i);
@@ -153,6 +158,14 @@ public class GuardarMedicamento extends AppCompatActivity                       
             return new DatePickerDialog(getActivity(), listener, year, month, day);
         }
     }*/
+
+    public void  abrirurl(View view){
+
+
+        Uri uri = Uri.parse(url_prospecto); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
 
     //-----------------------------------Guardar Medicamento en la Base de Datos----------------------------------
 
