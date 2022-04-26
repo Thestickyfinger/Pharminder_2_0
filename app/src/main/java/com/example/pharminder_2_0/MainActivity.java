@@ -110,7 +110,58 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         m_listview.setAdapter(notes);
     }
 
+
+    //---------------------Creamos menu con las tres opciones de añadir------------------
+
+    public void showPopup(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popupmenu);
+        popup.show();
+        LinearLayout dim_layout = (LinearLayout) findViewById(R.id.dim_layout);
+        dim_layout.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+
+        /* ESto no funciona deltodo porque cuando pulsas fuera no vuelve a iluminarse*/
+        LinearLayout dim_layout = (LinearLayout) findViewById(R.id.dim_layout);
+        dim_layout.setVisibility(View.INVISIBLE);
+
+        switch (item.getItemId()) {
+            case R.id.item1:
+                Toast.makeText(this, "Codigo de barras", Toast.LENGTH_SHORT);
+                escanear();
+                return true;
+
+            case R.id.item2:
+                Toast.makeText(this, "Codigo nacional", Toast.LENGTH_SHORT);
+                createNoteFromCN();
+                return true;
+
+            case R.id.item3:
+                Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
+                createNoteFromNombre();
+
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(this, "setings", Toast.LENGTH_SHORT);
+                switchMaintoSettings();
+                return true;
+            default:
+
+                return false;
+        }
+    }
+
     //-------------------Escaneo Cod-Barras y Busqueda en Api------------------------------
+
+    public void  escanear(){
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan();
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -132,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
     }
 
-
+    //--------------------------------Busqueda en Api------------------------------
 
     private class APIFromCIMATask extends AsyncTask<String, String, String> {
 
@@ -221,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
 
     }
+
     private void switchMaintoBarCode(ArrayList result) {
         // Creamos el Intent que va a lanzar la activity de editar medicamento (ApiCodeBar)
         Intent intent = new Intent(this, GuardarMedicamento.class);
@@ -235,99 +287,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         startActivity(intent);
     }
 
-
-
-    //---------------------Creamos menu con las tres opciones de añadir------------------
-
-    public void showPopup(View view) {
-        PopupMenu popup = new PopupMenu(this, view);
-        popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popupmenu);
-        popup.show();
-        LinearLayout dim_layout = (LinearLayout) findViewById(R.id.dim_layout);
-        dim_layout.setVisibility(View.VISIBLE);
-
-    }
-
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-
-        /* ESto no funciona del todo porque cuando pulsas fuera no vuelve a iluminarse*/
-
-        LinearLayout dim_layout = (LinearLayout) findViewById(R.id.dim_layout);
-        dim_layout.setVisibility(View.INVISIBLE);
-
-        switch (item.getItemId()) {
-            case R.id.item1:
-                Toast.makeText(this, "Codigo de barras", Toast.LENGTH_SHORT);
-               escanear();
-                return true;
-
-            case R.id.item2:
-                Toast.makeText(this, "Codigo nacional", Toast.LENGTH_SHORT);
-                createNoteFromCN();
-                 return true;
-
-            case R.id.item3:
-                Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
-                createNoteFromNombre();
-
-                return true;
-            case R.id.action_settings:
-                Toast.makeText(this, "setings", Toast.LENGTH_SHORT);
-                switchMaintoSettings();
-                return true;
-            default:
-
-                return false;
-        }
-    }
-    //menu para setting
-
-
-    public void  escanear(){
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.initiateScan();
-    }
-
-
-    public void openMaps(View view) {
-        // Do something in response to button
-        switchMaintoMaps();
-
-    }
-
-    private void switchMaintoMaps() {
-
-        startActivity(new Intent(MainActivity.this, MapsActivity.class));
-
-    }
-
-    private void switchtoMain() {
-
-        startActivity(new Intent(MainActivity.this, MainActivity.class));
-
-    }
-
-
-
-    private void switchMaintocalendar() {
-
-        startActivity(new Intent(MainActivity.this, CalendarActivity.class));
-
-    }
-    private void switchMaintoSettings() {
-
-        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-
-    }
+    //---------------------------Añadir por CN y por Nombre---------------------------------
 
     private void createNoteFromCN() {
         /*Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
         startActivityForResult(i, 1);*/
         setContentView(R.layout.busqueda_cn);
     }
+
     public void createNote(View view){
         codigo_nacional = (EditText) findViewById(R.id.title_cn);
         String codigonacional = codigo_nacional.getText().toString();
@@ -340,7 +307,35 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
         startActivityForResult(i, 1);
     }
-    //Creamos menu settings con las tres opciones de añadir
+
+    //------------------------------Codigo para cambiar a Maps Activity---------------------
+    public void openMaps(View view) {
+        // Do something in response to button
+        switchMaintoMaps();
+
+    }
+
+    private void switchMaintoMaps() {
+
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+
+    }
+
+    //------------------------Codigo para volver a empezar MainActivity-----------------
+
+    private void switchtoMain() {
+
+        startActivity(new Intent(MainActivity.this, MainActivity.class));
+
+    }
+
+    //---------------------------Codigo de Menu Settings------------------------------------
+
+    private void switchMaintoSettings() {
+
+        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+
+    }
 
     public void showsettings(View view) {
         PopupMenu popupsettings = new PopupMenu(this, view);
@@ -350,8 +345,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     }
 
-
-    //----------------Codigo del CalendarActivity---------------
+    //-------------------------Codigo del CalendarActivity-----------------------------------
 
     private void initWidgets()
     {
