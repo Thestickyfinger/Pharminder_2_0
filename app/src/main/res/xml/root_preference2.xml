@@ -2,19 +2,22 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Información General del Medicamento">
+    <PreferenceCategory
+        android:layout_marginTop="200px"
+        app:title="Información General del Medicamento">
 
 
         <EditTextPreference
-            app:key="Nombre medicamento"
-            app:title="Nombre del medicamento" />
+            app:key="Nombre"
+            app:title="Nombre"
+           />
 
         <ListPreference
             app:defaultValue="false"
             app:entries="@array/reply_entries"
             app:entryValues="@array/reply_values"
-            app:key="princActivo"
-            app:title="Principio activo"
+            app:key="Notificaciones"
+            app:title="Sonido en las notificaciones"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>

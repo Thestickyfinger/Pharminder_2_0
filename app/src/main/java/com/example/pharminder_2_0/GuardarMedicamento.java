@@ -9,7 +9,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -39,8 +38,10 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
 
+import kotlinx.coroutines.Job;
 
-public class GuardarMedicamento extends AppCompatActivity                                      {
+
+public class GuardarMedicamento extends AppCompatActivity  implements SharedPreferences.OnSharedPreferenceChangeListener {
     //implements View.OnClickListener
 
     private TextView nombre;
@@ -52,7 +53,7 @@ public class GuardarMedicamento extends AppCompatActivity                       
     private TextView mTitleText;
     private TextView mBodyText;
     private Long mRowId;
-    private NotesDbAdapter dbAdapter;
+    private MedicamentoAdapter dbAdapter;
     //variables para las alarmas
     Calendar c = Calendar.getInstance();
     int cyear = c.get(Calendar.YEAR);
@@ -64,14 +65,13 @@ public class GuardarMedicamento extends AppCompatActivity                       
     Button timeButton, dateButton, dateButton1, numberButton;
     private NumberPicker picker1;
 
-
-    @Override
+   @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen_medicamento);
 
         //creamos el adaptador de la BD y la abrimos
-        dbAdapter = new NotesDbAdapter(this);
+        dbAdapter = new MedicamentoAdapter(this);
         dbAdapter.open();
 
 
@@ -417,6 +417,10 @@ public void sendName(View view) {
 
         DatePickerDialog.setTitle("Select Date");
         DatePickerDialog.show();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
     }
 }
 

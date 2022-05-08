@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private static final String API_URL  = "https://cima.aemps.es/cima/rest/medicamento";
 
-    private NotesDbAdapter dbAdapter;
+    private MedicamentoAdapter dbAdapter;
     private ListView m_listview;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         setContentView(R.layout.activity_notepad);
 
         //creamos el adaptador de la BD y la abrimos
-        dbAdapter = new NotesDbAdapter(this);
+        dbAdapter = new MedicamentoAdapter(this);
         dbAdapter.open();
 
         //Codigo del CalendarActivity
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
                         Intent i = new Intent(view.getContext(), GuardarMedicamento.class);
-                        i.putExtra(NotesDbAdapter.KEY_ROWID, id);
+                        i.putExtra(MedicamentoAdapter.KEY_ROWID, id);
                         startActivityForResult(i,1);
                     }
                 }
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Cursor notesCursor = dbAdapter.fetchAllNotes();
 
         // Creamos un array con los campos que queremos mostrar en el listview (sólo el título de la nota)
-        String[] from = new String[]{NotesDbAdapter.KEY_TITLE};
+        String[] from = new String[]{MedicamentoAdapter.KEY_TITLE};
 
         // array con los campos que queremos ligar a los campos del array de la línea anterior (en este caso sólo text1)
         int[] to = new int[]{R.id.text1};
@@ -218,11 +217,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 createNoteFromCN();
                 return true;
 
-            case R.id.item3:
-                Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
-                //createNoteFromNombre();
 
-                return true;
             case R.id.action_settings:
                 Toast.makeText(this, "setiings", Toast.LENGTH_SHORT);
                 switchMaintoSettings();

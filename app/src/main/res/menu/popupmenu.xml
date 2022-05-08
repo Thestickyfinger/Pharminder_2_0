@@ -11,10 +11,4 @@
         android:id="@+id/item2"
         android:title="Codigo nacional" />
 
-    <item
-        android:id="@+id/item3"
-        android:title="Nombre del medicamento"
-
-        />
-
 </menu>

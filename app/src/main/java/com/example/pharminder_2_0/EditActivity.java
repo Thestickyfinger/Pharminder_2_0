@@ -6,15 +6,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 // ----------------------------------YA NO SE USA------------------------------------------------------
 
@@ -23,7 +17,7 @@ public class EditActivity extends AppCompatActivity {
     private TextView titleText;
     private TextView bodyText;
     private Long mRowId;
-    private NotesDbAdapter dbAdapter;
+    private MedicamentoAdapter dbAdapter;
 
     private TextView c_presc;
     private TextView via_admin;
@@ -48,15 +42,15 @@ public class EditActivity extends AppCompatActivity {
         via_admin = (TextView) findViewById(R.id.viasdadministracion);
 
         //creamos el adaptador de la BD y la abrimos
-        dbAdapter = new NotesDbAdapter(this);
+        dbAdapter = new MedicamentoAdapter(this);
         dbAdapter.open();
 
         // obtiene id de fila de la tabla si se le ha pasado (hemos pulsado una nota para editarla)
         mRowId = (savedInstanceState == null) ? null :
-                (Long) savedInstanceState.getSerializable(NotesDbAdapter.KEY_ROWID);
+                (Long) savedInstanceState.getSerializable(MedicamentoAdapter.KEY_ROWID);
         if (mRowId == null) {
             Bundle extras = getIntent().getExtras();
-            mRowId = extras != null ? extras.getLong(NotesDbAdapter.KEY_ROWID) : null;
+            mRowId = extras != null ? extras.getLong(MedicamentoAdapter.KEY_ROWID) : null;
         }
         Throwable msg = null;
         Log.i(String.valueOf(msg), "---------------------------------mRowId: " + mRowId);
@@ -65,13 +59,13 @@ public class EditActivity extends AppCompatActivity {
         if (mRowId != null) {
             Cursor note = dbAdapter.fetchNote(mRowId);
             titleText.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE)));
+                    note.getColumnIndexOrThrow(MedicamentoAdapter.KEY_TITLE)));
             bodyText.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_BODY)));
+                    note.getColumnIndexOrThrow(MedicamentoAdapter.KEY_BODY)));
             c_presc.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_PRESCRIPCION)));
+                    note.getColumnIndexOrThrow(MedicamentoAdapter.KEY_PRESCRIPCION)));
             via_admin.setText(note.getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_VIADMIN)));
+                    note.getColumnIndexOrThrow(MedicamentoAdapter.KEY_VIADMIN)));
         }
     }
 

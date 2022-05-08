@@ -64,10 +64,6 @@
                 <action android:name="@strings/alarm" />
             </intent-filter>
         </receiver>
-        <activity
-            android:name=".NotepadActivity"
-            android:exported="true"
-            android:label="NotepadActivity"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
