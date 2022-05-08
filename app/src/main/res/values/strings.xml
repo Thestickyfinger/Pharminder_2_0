@@ -46,6 +46,13 @@
     <string name="body">Body</string>
     <string name="confirm">Confirm</string>
     <string name="edit_note">Edit Note</string>
+    <string name="button_ok">OK</string>
 
+    <string name="hello">Hello, %1$s!</string>
+
+    <string name="channel_id">AppMovChannelID</string>
+    <string name="channel_name">AppMovChannel</string>
+    <string name="channel_description">AppMov notification channel</string>
+    <string name="alarm">com.uc3m.it.helloalarmappmov.ALARM</string>
     <string name="via_administracion"></string>
 </resources>

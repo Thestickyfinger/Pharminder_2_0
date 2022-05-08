@@ -2,123 +2,131 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuardarMedicamento"
-    >
-<FrameLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".GuardarMedicamento">
+
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="160dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center|top|left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="40dp"
+            app:srcCompat="@drawable/pharminder_logo" />
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="387dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="100dp"
-            >
+            android:layout_gravity="top"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/info_medicamentos"
-                android:layout_width="265dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/nombre_medicamento"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical"
-                    android:text="Nombre"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/princ_Activo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical"
-                    android:text="pactivo"
-                    android:textSize="15dp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/presc_med"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical"
-                    android:text="Prescripción Medica: N/A"
-                    android:textSize="10dp"
-                    android:textStyle="italic" />
+                android:layout_marginTop="100dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/info_medicamentos"
+                    android:layout_width="265dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    >
+                    android:layout_gravity="top"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:id="@+id/viadmin"
+                        android:id="@+id/nombre_medicamento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Via de Administración: "
-                        android:textStyle="bold"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical"
+                        android:text="Nombre"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
                     <TextView
-                        android:id="@+id/vias_administracion"
+                        android:id="@+id/princ_Activo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="N/A"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical"
+                        android:text="pactivo"
+                        android:textSize="15dp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/presc_med"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical"
+                        android:text="Prescripción Medica: N/A"
+                        android:textSize="10dp"
+                        android:textStyle="italic" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/viadmin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Via de Administración: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/vias_administracion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="N/A" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imagen_medicamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Activar/Desactivar"
+                        android:textSize="15dp" />
+                    <!-- Boton que tendra de función activar o
+                        desactivar un medicamento en el menu principal -->
+                    <ToggleButton
+                        android:id="@+id/activar_medicamento"
+                        android:layout_width="57dp"
+                        android:layout_height="37dp"
+                        android:textOff="Off"
+                        android:textOn="On"
+
                         />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imagen_medicamento"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Activar/Desactivar"
-                    android:textSize="15dp"/>
-                <!-- Boton que tendra de función activar o
-                        desactivar un medicamento en el menu principal -->
-                <ToggleButton
-                    android:id="@+id/activar_medicamento"
-                    android:layout_width="57dp"
-                    android:layout_height="37dp"
-                    android:textOff="Off"
-                    android:textOn="On"
-
-                    />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    <!--
+            <!--
     <ListView
         android:id="@+id/id_list_view"
         android:layout_width="fill_parent"
@@ -131,78 +139,105 @@
 
     -->
 
-        <Button
-            android:layout_marginTop="5dp"
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:onClick="abrirurl"
-            android:text="Descargar Prospecto"
-            />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:onClick="abrirurl"
+                android:text="Descargar Prospecto" />
 
-        <!-- _____________Vamos a hacer las preferencias del usuario______________
+            <!-- _____________Vamos a hacer las preferencias del usuario______________
             -1ª toma del medicamento
             -Frecuencia de toma del medicamento
             -Momento de finalizacion de toma del medicamento
         -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/primeraToma"
-                android:hint="Fecha de 1ª toma"
+            <LinearLayout
+                android:layout_width="370dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/timeButton"
+                    android:layout_width="394dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="PopTimeTicker"
+                    android:text="Hora de inicio" />
+
+                <Button
+                    android:id="@+id/dateButton"
+                    android:layout_width="394dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="DateTicker"
+                    android:text="Fecha de inicio" />
+
+                <Button
+                    android:id="@+id/dateButton1"
+                    android:layout_width="394dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="DateTicker2"
+                    android:text="Fecha final" />
+
+
+            </LinearLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:focusable="false"
-                android:clickable="true"
-                android:maxLines="1" />
-            <EditText
-                android:id="@+id/frecuenciaToma"
-                android:hint="Frecuencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:focusable="false"
-                android:clickable="true"
-                android:maxLines="1" />
-            <EditText
-                android:id="@+id/ultimaToma"
-                android:hint="Fecha final"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:focusable="false"
-                android:clickable="true"
-                android:maxLines="1" />
+                android:layout_height="match_parent">
+
+                <NumberPicker
+                    android:id="@+id/np"
+                    android:layout_width="wrap_content"
+                    android:layout_height="125dp"
+                    android:layout_gravity="center|top"
+                    android:layout_marginLeft="170dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="157dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_weight="1"
+                    android:text="                CADA"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="95dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="HORAS           "
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/guardar_medicamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="250dp"
+                    android:onClick="sendName"
+                    android:text="Guardar Medicamento" />
+
+
+                <TextView
+                    android:id="@+id/snack"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="400sp"
+                    android:text="TextView" />
+
+
+            </RelativeLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/Layout_guardar_medicamento"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity ="bottom"
-        android:layout_marginLeft="180dp"
-        android:layout_marginBottom="55dp"
-        >
-        <Button
-            android:id="@+id/guardar_medicamento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/teal_200"
-            android:text="Guardar Medicamento"
-            android:onClick="saveNoteFromGuardar"/>
+    </FrameLayout>
 
-    </LinearLayout>
-
-    <include layout="@layout/pharminder" />
-
-
-</FrameLayout>
 </LinearLayout>

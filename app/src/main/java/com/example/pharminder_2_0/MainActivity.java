@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-                        Intent i = new Intent(view.getContext(), com.example.pharminder_2_0.GuardarMedicamento.class);
+                        Intent i = new Intent(view.getContext(), GuardarMedicamento.class);
                         i.putExtra(NotesDbAdapter.KEY_ROWID, id);
-                        startActivityForResult(i, 1);
+                        startActivityForResult(i,1);
                     }
                 }
         );

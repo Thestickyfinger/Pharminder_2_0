@@ -56,7 +56,14 @@
             android:label="EditActivity"
             android:parentActivityName=".MainActivity"
             />-->
-
+        <receiver
+            android:name=".MyBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="@strings/alarm" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".NotepadActivity"
             android:exported="true"
