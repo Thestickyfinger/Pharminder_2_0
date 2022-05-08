@@ -19,8 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 
 public class GuardarMedicamento extends AppCompatActivity                                      {
     //implements View.OnClickListener
@@ -41,7 +39,20 @@ public class GuardarMedicamento extends AppCompatActivity                       
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resumen_medicamento);
 
-        // obtiene referencia a los views que componen el layout
+        //creamos el adaptador de la BD y la abrimos
+        dbAdapter = new NotesDbAdapter(this);
+        dbAdapter.open();
+
+
+        Bundle bundle = this.getIntent().getExtras();
+        String respuesta = bundle.getString("Result");
+        SetPrescriptionData(respuesta);
+
+    }
+
+
+    public void SetPrescriptionData(String data) {
+
         nombre = (TextView) findViewById(R.id.nombre_medicamento);
         p_activo = (TextView) findViewById(R.id.princ_Activo);
         c_presc = (TextView) findViewById(R.id.presc_med);
@@ -52,26 +63,61 @@ public class GuardarMedicamento extends AppCompatActivity                       
         EditText frecuencia = (EditText) findViewById(R.id.frecuenciaToma);
         EditText ultima_toma = (EditText) findViewById(R.id.ultimaToma);
 
-        //creamos el adaptador de la BD y la abrimos
-        dbAdapter = new NotesDbAdapter(this);
-        dbAdapter.open();
+        JSONObject obj = null;
+        String jsonString = data;
+        String nombreMedicamento = null;
+        String pActivo = null;
+        String cPresc = null;
+        String urlProspecto = null;
+        String viasAdministracion = null;
+        //ArrayList<String> viasAdministracion = new ArrayList<String>();
+        //String urlImagenMedicamento = null;
+        if (data == null){
+
+        }
 
 
-        Bundle bundle = this.getIntent().getExtras();
-        ArrayList respuesta = bundle.getStringArrayList("Result");
-        SetPrescriptionData(respuesta);
+        try {
+            obj = new JSONObject(jsonString);
+            nombreMedicamento = obj.getString("nombre");
+            pActivo = obj.getString("pactivos");
+            cPresc = obj.getString("cpresc");
+            JSONArray documentosArray = obj.getJSONArray("docs");
+            JSONArray viasAdminArray = obj.getJSONArray("viasAdministracion");
 
-    }
+            //Loop para buscar PROSPECTO
+            for (int i = 0; i < documentosArray.length(); i++)
+            {
+                if(documentosArray.getJSONObject(i).getInt("tipo")==2){
+                    urlProspecto = documentosArray.getJSONObject(i).getString("url");
+                }
+            }
+            //Loop para buscar VIAS DE ADMINISTRACION
+            for (int i = 0; i < viasAdminArray.length(); i++)
+            {
+                //viasAdministracion.add(viasAdminArray.getJSONObject(i).getString("nombre"));
+                viasAdministracion = viasAdminArray.getJSONObject(i).getString("nombre");
+            }
 
-    public void SetPrescriptionData(ArrayList<String> data) {
 
-        nombre.setText(data.get(0));
-        p_activo.setText(data.get(1));
-        c_presc.setText(data.get(2));
-        url_prospecto = data.get(3);
-        via_admin.setText(data.get(4));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            nombreMedicamento    = "ERROR: " + e.getLocalizedMessage();
+        }
+
+        nombre.setText(nombreMedicamento);
+        p_activo.setText(pActivo);
+        c_presc.setText(cPresc);
+        via_admin.setText(viasAdministracion);
+        url_prospecto = urlProspecto;
+        //Loop para escribir lista de VIAS DE ADMINISTRACION
+        /*for(int i = 0;i < viasAdministracion.size(); i++){
+            vias_administracion = viasAdministracion.get(i);
+        }*/
 
         //imagen.setImage();
+
+
 
     }
 

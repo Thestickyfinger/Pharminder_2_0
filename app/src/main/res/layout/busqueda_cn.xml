@@ -45,7 +45,7 @@
                     android:layout_marginRight="10dp"
                     android:backgroundTint="@color/corp"
                     android:onClick="createNoteFromCN"
-                    android:text="@string/buscar" />
+                    android:text="@string/confirm" />
             </LinearLayout>
 
         </LinearLayout>

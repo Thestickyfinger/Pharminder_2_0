@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
     private TextView tvBarCode;
+    private ArrayList<String> resultado = new ArrayList<String>();
+    private EditText codigo_nacional;
 
 
 
