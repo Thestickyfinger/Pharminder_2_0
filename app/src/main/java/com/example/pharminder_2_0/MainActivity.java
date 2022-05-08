@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             case R.id.item3:
                 Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
-                createNoteFromNombre();
+                //createNoteFromNombre();
 
                 return true;
             case R.id.action_settings:
@@ -280,16 +280,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         api.execute();
     }
 
-    private void createNoteFromNombre() {
+    /*private void createNoteFromNombre() {
         setContentView(R.layout.busqueda_nombre);
     }
     public void createNoteFromNombre(View view){
-        nombre_medicamento = (EditText) findViewById(R.id.title_nombre);
+        EditText nombre_medicamento = (EditText) findViewById(R.id.title_nombre);
         String nombremedicamento = nombre_medicamento.getText().toString();
         APIFromCIMATask api = new APIFromCIMATask();
         api.nombre = nombremedicamento;
         api.execute();
-    }
+    }*/
 
 
     private void createNote() {
