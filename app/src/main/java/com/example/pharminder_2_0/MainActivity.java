@@ -212,12 +212,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             case R.id.item2:
                 Toast.makeText(this, "Codigo nacional", Toast.LENGTH_SHORT);
-                switchMaintocalendar();
-                 return true;
+                createNoteFromCN();
+                return true;
 
             case R.id.item3:
                 Toast.makeText(this, "Nombre del medicamento", Toast.LENGTH_SHORT);
-                createNote();
+                createNoteFromNombre();
 
                 return true;
             case R.id.action_settings:
@@ -262,6 +262,33 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 
+    }
+    
+    //---------------------------Añadir por CN y por Nombre---------------------------------
+
+    private void createNoteFromCN() {
+        /*Intent i = new Intent(this, com.example.pharminder_2_0.EditActivity.class);
+        startActivityForResult(i, 1);*/
+        setContentView(R.layout.busqueda_cn);
+    }
+
+    public void createNoteFromCN(View view){
+        codigo_nacional = (EditText) findViewById(R.id.title_cn);
+        String codigonacional = codigo_nacional.getText().toString();
+        APIFromCIMATask api = new APIFromCIMATask();
+        api.cn = codigonacional;
+        api.execute();
+    }
+
+    private void createNoteFromNombre() {
+        setContentView(R.layout.busqueda_nombre);
+    }
+    public void createNoteFromNombre(View view){
+        nombre_medicamento = (EditText) findViewById(R.id.title_nombre);
+        String nombremedicamento = nombre_medicamento.getText().toString();
+        APIFromCIMATask api = new APIFromCIMATask();
+        api.nombre = nombremedicamento;
+        api.execute();
     }
 
 
